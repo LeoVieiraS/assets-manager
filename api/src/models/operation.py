@@ -1,4 +1,3 @@
-from flask import current_app, session
 from marshmallow import EXCLUDE
 from marshmallow_sqlalchemy import SQLAlchemySchema
 from models import db
