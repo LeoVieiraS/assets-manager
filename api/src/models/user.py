@@ -13,7 +13,7 @@ class User(db.Model):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password_hash = db.Column(db.String(255), nullable=False)
 
-    operations = db.relationship("Operations", backref="user", lazy=True)
+    operations = db.relationship("Operation", backref="user", lazy=True)
 
     @property
     def password(self):
