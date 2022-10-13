@@ -1,4 +1,3 @@
-from distutils.command import check
 from marshmallow_sqlalchemy import SQLAlchemySchema
 from werkzeug.security import generate_password_hash, check_password_hash
 from marshmallow import EXCLUDE
@@ -13,6 +12,8 @@ class User(db.Model):
     surname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     password_hash = db.Column(db.String(255), nullable=False)
+
+    operations = db.relationship("Operations", backref="user", lazy=True)
 
     @property
     def password(self):

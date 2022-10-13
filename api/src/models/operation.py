@@ -4,6 +4,7 @@ from models import db
 
 
 class Operation(db.Model):
+    __tablename__ = "operations"
 
     id = db.Column(db.Integer, primary_key=True)
     operation_type = db.Column(db.String, nullable=False)
@@ -17,6 +18,10 @@ class Operation(db.Model):
     fee = db.Column(db.Float, nullable=False)
     usd_fee = db.Column(db.Float, nullable=False)
     coin_fee = db.Column(db.String, nullable=False)
+
+    user_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False, default=0
+    )
 
 
 class OperationSchema(SQLAlchemySchema):
@@ -37,4 +42,5 @@ class OperationSchema(SQLAlchemySchema):
             "fee",
             "usd_fee",
             "coin_fee",
+            "user_id",
         )
