@@ -29,15 +29,11 @@ def admin_authorization(f):
 def user_authorization(f):
     def wrapper(*args, **kwargs):
         payload = get_payload_from_token()
-        print(payload)
         user: User = UserRepository.find_by_id(payload["id"])
         if not user:
             return jsonify({"error": "Not Allowed"})
-
         g.user_id = user.id
-        print("aaa")
-        print(g.get("user_id"))
-
         return f()
 
+    wrapper.__name__ = f.__name__
     return wrapper
