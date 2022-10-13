@@ -1,8 +1,8 @@
 from abc import abstractmethod
-from flask import request, jsonify
+from flask import request, jsonify, g
 
 from repositories.operation_repository import OperationRepository
-from models.operation import Operation, OperationSchema
+from models.operation import OperationSchema
 from models import db
 
 
@@ -27,6 +27,7 @@ class OperationService:
 
     @abstractmethod
     def search_operations():
+        return jsonify({"message": f"Operaçoes do usuario {g.user_id}"})
         op = OperationRepository.find_all()
         operation_schema = OperationSchema()
         list_operations = [operation_schema.dump(o) for o in op]

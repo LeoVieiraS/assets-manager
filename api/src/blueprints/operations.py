@@ -1,13 +1,12 @@
-from flask import Blueprint, jsonify
-from models import db
-from models.operation import Operation, OperationSchema
-from flask import request, Response
+from flask import Blueprint
+from auth.auth import user_authorization
 from services.operation_service import OperationService
 
 operations_blueprints = Blueprint("operations", __name__, url_prefix="/api/v1")
 
 
 @operations_blueprints.route("/operations", methods=["GET"])
+@user_authorization
 def find_all():
     return OperationService.search_operations()
 
