@@ -1,7 +1,7 @@
 import traceback
 from abc import abstractmethod
 
-from flask import jsonify
+from flask import jsonify, g
 from models import db
 from models.operation import Operation, OperationSchema
 from typing import List
@@ -33,7 +33,7 @@ class OperationRepository:
 
     @abstractmethod
     def find_all() -> List[Operation]:
-        return Operation.query.all()
+        return Operation.query.filter_by(user_id=g.user_id)
 
     @abstractmethod
     def find_by_id(id: int):

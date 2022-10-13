@@ -12,6 +12,7 @@ def find_all():
 
 
 @operations_blueprints.route("/operations", methods=["POST"])
+@user_authorization
 def create():
     return OperationService.create_operation()
 
